@@ -233,6 +233,13 @@
         border-color: var(--gold);
         color: #fff;
       }
+      .scroll-indicator {
+        margin-top: 2rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
 
       /* ── SECTIONS ── */
       section {
@@ -244,8 +251,8 @@
         padding: 0 2.5rem;
       }
       .section-label {
-        font-size: 0.7rem;
-        letter-spacing: 0.22em;
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
         text-transform: uppercase;
         color: var(--gold);
         font-weight: 500;
@@ -253,10 +260,10 @@
       }
       .section-heading {
         font-family: "Cormorant Garamond", serif;
-        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        font-size: 2rem;
         font-weight: 300;
         line-height: 1.15;
-        margin-bottom: 2.5rem;
+        margin-bottom: 2rem;
       }
       .section-heading em {
         font-style: italic;
@@ -634,6 +641,20 @@
         font-size: 0.74rem;
         letter-spacing: 0.08em;
       }
+      #toTop {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        width: 48px;
+        height: 48px;
+        border: none;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        cursor: pointer;
+        z-index: 100;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      }
 
       .fade-in {
         opacity: 0;
@@ -651,53 +672,22 @@
          MOBILE — max 768px
       ═══════════════════════════════ */
       @media (max-width: 768px) {
-        /* NAV — make the hamburger obvious on phones */
-        nav {
-          padding: 0.85rem 1rem;
-          align-items: center;
-        }
-        .menu-toggle {
-          display: flex;
-          z-index: 120;
-          width: 44px;
-          height: 44px;
-          background: #fff;
-          border: 1px solid var(--rule);
-          box-shadow: 0 8px 18px rgba(13, 13, 13, 0.08);
-        }
-        .nav-logo {
-          font-size: 1rem;
-        }
         .nav-links {
-          position: fixed;
-          top: 0;
-          right: -100%;
-          bottom: 0;
-          width: 82vw;
-          max-width: 320px;
-          background: linear-gradient(180deg, #fff 0%, var(--cream) 100%);
-          flex-direction: column;
-          gap: 0;
-          padding: 5rem 0.75rem 1rem;
-          z-index: 110;
-          transition: right 0.3s ease;
-          border-left: 1px solid var(--rule);
-          box-shadow: -10px 0 24px rgba(13, 13, 13, 0.12);
+          display: none;
         }
-        .nav-links.open {
-          right: 0;
+
+        .menu-toggle {
+          display: none;
         }
-        .nav-links li {
-          width: 100%;
+
+        nav {
+          justify-content: center;
+          padding: 1rem;
         }
-        .nav-links a {
-          display: flex;
-          align-items: center;
-          padding: 0.95rem 0.9rem;
-          font-size: 0.82rem;
-          border: 1px solid var(--rule);
-          border-radius: 10px;
-          background: rgba(255, 255, 255, 0.9);
+
+        .nav-logo {
+          font-size: 1.15rem;
+          letter-spacing: 0.08em;
         }
 
         /* HERO */
@@ -849,6 +839,7 @@
           <a href="#documents" class="btn btn-primary">View Credentials</a>
           <a href="#contact" class="btn btn-outline">Get in Touch</a>
         </div>
+        <div class="scroll-indicator">Scroll to explore ↓</div>
       </div>
     </section>
 
@@ -1330,6 +1321,8 @@
       © 2026 Lisa Singine · Programme Manager · British High Commission Lusaka
     </footer>
 
+    <button id="toTop" type="button" aria-label="Back to top">↑</button>
+
     <script>
       // Fade in
       const observer = new IntersectionObserver(
@@ -1368,6 +1361,13 @@
         .forEach((a) => a.addEventListener("click", () => openMenu(false)));
       window.addEventListener("resize", () => {
         if (window.innerWidth > 768) openMenu(false);
+      });
+
+      document.getElementById("toTop").addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
     </script>
   </body>
