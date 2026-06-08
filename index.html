@@ -1,836 +1,614 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lisa Singine — Programme Manager | International Development</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --ink: #0d0d0d;
-    --cream: #f7f4ef;
-    --gold: #b8923a;
-    --gold-light: #d4ab5a;
-    --muted: #6b6560;
-    --rule: #e2ddd8;
-    --accent: #1a2744;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 3rem;
-    background: rgba(247,244,239,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
-  }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    font-weight: 300;
-    letter-spacing: 0.12em;
-    color: var(--ink);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
-  .nav-links a {
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-
-  /* HERO */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-left {
-    background: var(--accent);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 8rem 4rem 5rem;
-    position: relative;
-  }
-  .hero-left::after {
-    content: '';
-    position: absolute;
-    top: 0; right: -1px;
-    width: 80px; height: 100%;
-    background: linear-gradient(to right, var(--accent), transparent);
-    z-index: 1;
-  }
-  .hero-eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.2rem;
-    font-weight: 500;
-  }
-  .hero-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3.2rem, 5vw, 5rem);
-    font-weight: 300;
-    color: #fff;
-    line-height: 1.05;
-    margin-bottom: 1.6rem;
-  }
-  .hero-name span { font-style: italic; color: var(--gold-light); }
-  .hero-title {
-    font-size: 0.88rem;
-    font-weight: 300;
-    color: rgba(255,255,255,0.65);
-    letter-spacing: 0.06em;
-    line-height: 1.9;
-    max-width: 380px;
-  }
-  .hero-divider { width: 40px; height: 1px; background: var(--gold); margin: 1.8rem 0; }
-  .hero-stats { display: flex; gap: 2.4rem; margin-top: 2.4rem; }
-  .stat-item { color: #fff; }
-  .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: var(--gold-light);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-top: 0.3rem;
-  }
-  .hero-right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 8rem 5rem 5rem 6rem;
-    position: relative;
-  }
-  .hero-right::before {
-    content: '"';
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18rem;
-    color: var(--rule);
-    position: absolute;
-    top: -2rem; left: 3rem;
-    line-height: 1;
-    pointer-events: none;
-    user-select: none;
-  }
-  .hero-summary {
-    position: relative;
-    z-index: 1;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.55rem;
-    font-weight: 300;
-    line-height: 1.65;
-    color: var(--ink);
-    margin-bottom: 2.4rem;
-    max-width: 440px;
-  }
-  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; position: relative; z-index: 1; }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.8rem 1.8rem;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: 1.5px solid;
-    transition: all 0.25s;
-    cursor: pointer;
-  }
-  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
-  .btn-outline { background: transparent; border-color: var(--ink); color: var(--ink); }
-  .btn-outline:hover { background: var(--ink); color: var(--cream); }
-  .btn-gold { background: var(--gold); border-color: var(--gold); color: #fff; }
-  .btn-gold:hover { background: var(--accent); border-color: var(--accent); }
-
-  /* SECTIONS */
-  section { padding: 6rem 0; }
-  .container { max-width: 1080px; margin: 0 auto; padding: 0 3rem; }
-  .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 0.6rem;
-  }
-  .section-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 3vw, 2.8rem);
-    font-weight: 300;
-    color: var(--ink);
-    line-height: 1.15;
-    margin-bottom: 3rem;
-  }
-  .section-heading em { font-style: italic; color: var(--gold); }
-
-  /* ACHIEVEMENTS */
-  #achievements { background: #fff; }
-  .achieve-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5px;
-    background: var(--rule);
-    border: 1.5px solid var(--rule);
-  }
-  .achieve-card {
-    background: #fff;
-    padding: 2.4rem 2rem;
-    transition: background 0.2s;
-  }
-  .achieve-card:hover { background: var(--cream); }
-  .achieve-icon { font-size: 1.6rem; margin-bottom: 1rem; }
-  .achieve-heading {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.6rem;
-    line-height: 1.3;
-  }
-  .achieve-body { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
-  .achieve-tag {
-    display: inline-block;
-    margin-top: 1rem;
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding-bottom: 0.1rem;
-  }
-
-  /* EXPERIENCE */
-  #experience { background: var(--cream); }
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: var(--rule);
-  }
-  .timeline-item { position: relative; padding-bottom: 3rem; padding-left: 2.4rem; }
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2rem; top: 0.4rem;
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--cream);
-    box-shadow: 0 0 0 1px var(--gold);
-  }
-  .timeline-period {
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.4rem;
-    font-weight: 500;
-  }
-  .timeline-role {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.15rem;
-    line-height: 1.2;
-  }
-  .timeline-org {
-    font-size: 0.82rem;
-    color: var(--accent);
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    margin-bottom: 1rem;
-  }
-  .timeline-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .timeline-list li {
-    font-size: 0.88rem;
-    color: var(--muted);
-    padding-left: 1rem;
-    position: relative;
-    line-height: 1.7;
-  }
-  .timeline-list li::before { content: '—'; position: absolute; left: 0; color: var(--gold); }
-  .timeline-highlight {
-    background: var(--accent);
-    color: #fff;
-    padding: 0.8rem 1.2rem;
-    margin-top: 1rem;
-    font-size: 0.84rem;
-    border-left: 3px solid var(--gold);
-    line-height: 1.6;
-  }
-
-  /* PARTNERS */
-  #partners { background: #fff; }
-  .partners-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-  .partner-group {
-    border: 1px solid var(--rule);
-    padding: 1.8rem;
-  }
-  .partner-theme {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 1rem;
-    padding-bottom: 0.6rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .partner-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-  .partner-list li { font-size: 0.86rem; color: var(--ink); }
-
-  /* EDUCATION */
-  #education { background: var(--accent); }
-  #education .section-heading { color: #fff; }
-  #education .section-label { color: var(--gold-light); }
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-  .edu-card {
-    border: 1px solid rgba(255,255,255,0.12);
-    padding: 2rem;
-    transition: border-color 0.2s;
-  }
-  .edu-card:hover { border-color: var(--gold); }
-  .edu-card.featured {
-    grid-column: span 2;
-    border-color: var(--gold);
-    background: rgba(255,255,255,0.04);
-  }
-  .edu-badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    padding: 0.2rem 0.6rem;
-    margin-bottom: 1rem;
-  }
-  .edu-qual {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 400;
-    color: #fff;
-    margin-bottom: 0.3rem;
-    line-height: 1.3;
-  }
-  .edu-inst { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
-  .edu-year { font-size: 0.72rem; color: var(--gold-light); letter-spacing: 0.1em; }
-
-  /* DOCUMENTS */
-  #documents { background: var(--cream); }
-  .docs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .doc-card {
-    border: 1.5px solid var(--rule);
-    padding: 1.6rem;
-    text-decoration: none;
-    color: var(--ink);
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-    background: #fff;
-  }
-  .doc-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transition: transform 0.25s;
-  }
-  .doc-card:hover { border-color: var(--gold); background: var(--cream); }
-  .doc-card:hover::after { transform: scaleX(1); }
-  .doc-type { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
-  .doc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; line-height: 1.3; color: var(--ink); }
-  .doc-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; flex: 1; }
-  .doc-arrow { font-size: 0.78rem; color: var(--gold); align-self: flex-start; margin-top: 0.4rem; }
-
-  /* CONTACT */
-  #contact { background: #fff; border-top: 1px solid var(--rule); }
-  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-  .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
-  .contact-row {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--rule);
-  }
-  .contact-row:last-child { border-bottom: none; }
-  .contact-key { font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); min-width: 80px; font-weight: 500; }
-  .contact-val { font-size: 0.88rem; color: var(--ink); }
-  .contact-val a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
-  .contact-val a:hover { border-color: var(--gold); }
-  .links-panel { display: flex; flex-direction: column; gap: 0.8rem; }
-  .link-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.2rem;
-    background: var(--cream);
-    border: 1px solid var(--rule);
-    text-decoration: none;
-    color: var(--ink);
-    font-size: 0.85rem;
-    transition: all 0.2s;
-  }
-  .link-row:hover { border-color: var(--gold); background: var(--cream); }
-  .link-row-icon { font-size: 1.1rem; min-width: 24px; }
-  .link-row-label { flex: 1; }
-  .link-row-arrow { color: var(--gold); font-size: 0.8rem; }
-
-  footer {
-    background: var(--ink);
-    color: rgba(255,255,255,0.4);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.75rem;
-    letter-spacing: 0.08em;
-  }
-
-  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .fade-in.visible { opacity: 1; transform: none; }
-
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 9rem 2rem 3rem; }
-    .hero-right { padding: 3rem 2rem 4rem; }
-    .achieve-grid { grid-template-columns: 1fr; }
-    .partners-grid { grid-template-columns: 1fr; }
-    .edu-grid { grid-template-columns: 1fr; }
-    .edu-card.featured { grid-column: span 1; }
-    .docs-grid { grid-template-columns: 1fr 1fr; }
-    .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.4rem; }
-    .container { padding: 0 1.5rem; }
-  }
-</style>
-</head>
-<body>
-
-<nav>
-  <a href="#" class="nav-logo">Lisa Singine</a>
-  <ul class="nav-links">
-    <li><a href="#achievements">Impact</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#partners">Partners</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#documents">Documents</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Programme Manager · International Development</p>
-    <h1 class="hero-name">Lisa<br><span>Singine</span></h1>
-    <div class="hero-divider"></div>
-    <p class="hero-title">
-      Foreign Commonwealth &amp; Development Office<br>
-      British High Commission, Lusaka, Zambia<br>
-      FCDO Certified Project Delivery Professional
-    </p>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num">15+</div>
-        <div class="stat-label">Years at BHC</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">36,100</div>
-        <div class="stat-label">Girls Reached</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">£47m</div>
-        <div class="stat-label">Programmes Led</div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <p class="hero-summary">
-      Senior programme professional delivering impact at scale
-      across education, health, governance, and social protection
-      in Zambia — at the highest levels of the British government.
-    </p>
-    <div class="hero-cta">
-      <a href="#documents" class="btn btn-primary">View Credentials</a>
-      <a href="#contact" class="btn btn-outline">Get in Touch</a>
-    </div>
-  </div>
-</section>
-
-<!-- ACHIEVEMENTS -->
-<section id="achievements">
-  <div class="container">
-    <p class="section-label fade-in">Headline Achievements</p>
-    <h2 class="section-heading fade-in">Proven <em>impact</em> at scale</h2>
-    <div class="achieve-grid">
-
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🎓</div>
-        <h3 class="achieve-heading">36,100 Girls — Target Exceeded by 40%</h3>
-        <p class="achieve-body">Served as Programme Responsible Owner for FCDO's £12m Girls' Education Infrastructure Programme across 5 provinces and 8 schools. Exceeded the target of 36,100 girl beneficiaries by 40%, expanding from 6 to 8 schools including 2 new builds in rural Zambia.</p>
-        <span class="achieve-tag">Programme Ownership</span>
-      </div>
-
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🏥</div>
-        <h3 class="achieve-heading">£35m Health Systems Strengthening Programme</h3>
-        <p class="achieve-body">Managed the £35m Health Systems Strengthening Programme working with WHO, UNFPA, and USAID. Built a performance tracking system that cleared all audit findings and earned a formal commendation for managing a high-risk programme above grade — directly contributing to promotion.</p>
-        <span class="achieve-tag">High-Risk Programme Management</span>
-      </div>
-
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">⭐</div>
-        <h3 class="achieve-heading">Three Consecutive FCDO Spot Awards</h3>
-        <p class="achieve-body">Developed a compliance tracking tool permanently adopted across the full FCDO programme hub, ensuring 100% on-time completion of due diligence processes and annual review recommendations. Recognised with three consecutive quarterly Spot Awards (£250 each).</p>
-        <span class="achieve-tag">Excellence Award</span>
-      </div>
-
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🤝</div>
-        <h3 class="achieve-heading">Resolved Critical Government Partnership</h3>
-        <p class="achieve-body">Brokered resolution of a high-risk breakdown between PEAS and the Zambian Ministry of Education — perceived as a political problem at national level. Through targeted influencing and joint engagements with the British Council, MoE went on to commission elements of PEAS's work and officially open several of their schools.</p>
-        <span class="achieve-tag">Stakeholder Diplomacy</span>
-      </div>
-
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🔐</div>
-        <h3 class="achieve-heading">FCDO Certified Project Delivery Professional</h3>
-        <p class="achieve-body">Formally recognised under the FCDO Project Delivery Profession framework — a British government certification of advanced competence in programme lifecycle management. One of a small number of locally engaged staff to hold this certification.</p>
-        <span class="achieve-tag">Professional Certification</span>
-      </div>
-
-      <div class="achieve-card fade-in">
-        <div class="achieve-icon">🚀</div>
-        <h3 class="achieve-heading">Twice Acting Programme Officer</h3>
-        <p class="achieve-body">Appointed Acting Programme Officer in 2018 and again in 2022 ahead of permanent confirmation — both reflecting sustained high performance and trust from senior FCDO leadership across over eight years as Assistant Programme Officer.</p>
-        <span class="achieve-tag">Leadership Recognition</span>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="container">
-    <p class="section-label fade-in">Career History</p>
-    <h2 class="section-heading fade-in">Over 15 years at the<br><em>British High Commission</em></h2>
-    <div class="timeline">
-
-      <div class="timeline-item fade-in">
-        <p class="timeline-period">June 2022 – Present</p>
-        <h3 class="timeline-role">Programme Officer</h3>
-        <p class="timeline-org">Foreign Commonwealth &amp; Development Office (FCDO) · British High Commission, Lusaka</p>
-        <ul class="timeline-list">
-          <li>Programme Responsible Owner for the £12m Girls' Education Infrastructure Programme — 36,100 girl beneficiaries across 5 provinces and 8 schools, exceeding targets by 40%</li>
-          <li>Manage full delivery cycle across Democracy &amp; Governance, Social Protection, and Girls' Education programmes in alignment with FCDO compliance standards</li>
-          <li>Develop and maintain Theory of Change frameworks; apply adaptive management to evolving programme contexts</li>
-          <li>Manage partner funding agreements with PEAS, British Council, UNICEF, World Bank, British Red Cross, and Ministry of Education</li>
-          <li>Oversee financial forecasting, expenditure tracking, and risk management across all programme lifecycles</li>
-          <li>Deliver quarterly compliance training for all 1HMG staff; advise on regulatory adherence and internal controls</li>
-          <li>Identified a financial discrepancy through field interaction with a downstream partner and escalated through FCDO counter-fraud channels</li>
-          <li>Brokered resolution of the PEAS–Ministry of Education partnership breakdown through joint British Council engagements, resulting in MoE commissioning PEAS work and opening multiple schools</li>
-        </ul>
-        <div class="timeline-highlight">
-          Three consecutive FCDO Spot Awards for developing a permanent compliance tool adopted across the full programme hub. Formally commended for managing a high-risk programme above grade.
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <p class="timeline-period">April 2014 – May 2022</p>
-        <h3 class="timeline-role">Assistant Programme Officer</h3>
-        <p class="timeline-org">Foreign Commonwealth &amp; Development Office (FCDO) · British High Commission, Lusaka</p>
-        <ul class="timeline-list">
-          <li>Supported delivery across multiple FCDO programmes including the £35m Health Systems Strengthening Programme (WHO, UNFPA, USAID)</li>
-          <li>Built the £35m programme tracking system — improving partner reporting significantly and clearing all outstanding audit findings</li>
-          <li>Drafted and managed partner funding agreements for NGOs and multilateral partners in standard FCDO formats</li>
-          <li>Contributed to performance reviews, field monitoring visits, and due diligence assessments across multiple thematic areas</li>
-          <li>Assisted with financial management through forecasting, expenditure tracking, and DFID payment processing</li>
-          <li>Acted as Personal Assistant to the British High Commissioner and Development Director during absences</li>
-        </ul>
-        <div class="timeline-highlight">
-          Appointed Acting Programme Officer in 2018 and again in 2022 ahead of permanent confirmation.
-        </div>
-      </div>
-
-      <div class="timeline-item fade-in">
-        <p class="timeline-period">April 2009 – March 2014</p>
-        <h3 class="timeline-role">Entry Clearance Assistant</h3>
-        <p class="timeline-org">UK Border Agency · British High Commission, Lusaka</p>
-        <ul class="timeline-list">
-          <li>Managed operations of the UK Border Agency visa section in Zambia, including records management and monthly audit compliance</li>
-          <li>Served as the primary point of contact for all applicants — including diplomatic passport holders and senior government officials — while the Entry Clearance Manager operated remotely from South Africa</li>
-          <li>Provided direct applicant assessments and professional opinions to inform visa decisions</li>
-          <li>Enrolled biometrics and maintained workstations to UK Border Agency standards</li>
-          <li>Line-managed a member of the visa section team</li>
-        </ul>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- PARTNERS -->
-<section id="partners">
-  <div class="container">
-    <p class="section-label fade-in">Organisations Worked With</p>
-    <h2 class="section-heading fade-in">Key <em>partners</em> &amp; institutions</h2>
-    <div class="partners-grid">
-      <div class="partner-group fade-in">
-        <p class="partner-theme">Girls' Education</p>
-        <ul class="partner-list">
-          <li>Promoting Equality in African Schools (PEAS)</li>
-          <li>British Council</li>
-          <li>Ministry of Education, Zambia</li>
-        </ul>
-      </div>
-      <div class="partner-group fade-in">
-        <p class="partner-theme">Health Systems Strengthening</p>
-        <ul class="partner-list">
-          <li>World Health Organisation (WHO)</li>
-          <li>UNFPA</li>
-          <li>USAID</li>
-        </ul>
-      </div>
-      <div class="partner-group fade-in">
-        <p class="partner-theme">Social Protection</p>
-        <ul class="partner-list">
-          <li>World Bank</li>
-          <li>UNICEF</li>
-          <li>British Red Cross</li>
-          <li>Institute of Development Studies (IDS)</li>
-          <li>Ministry of Community Development &amp; Social Services</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="container">
-    <p class="section-label fade-in">Academic Credentials</p>
-    <h2 class="section-heading fade-in">Education &amp; <em>Qualifications</em></h2>
-    <div class="edu-grid">
-
-      <div class="edu-card featured fade-in">
-        <span class="edu-badge">Degree · Programme Completed</span>
-        <h3 class="edu-qual">Bachelor of Science in Project Management</h3>
-        <p class="edu-inst">Cavendish University Zambia — School of Business &amp; IT</p>
-        <p class="edu-year">2021 – 2025 · Graduation: 2nd October 2026</p>
-        <p style="font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:0.8rem;line-height:1.7;">
-          Full four-year programme completed. Final year modules: Research Methods (B+), Change Management (B+), Project Appraisal &amp; Analysis (B), Project Closure &amp; Handover (B+). Official completion letter available on request.
-        </p>
-      </div>
-
-      <div class="edu-card fade-in">
-        <span class="edu-badge">Diploma · ABE Level 6</span>
-        <h3 class="edu-qual">Diploma in Business Management (QCF)</h3>
-        <p class="edu-inst">Association of Business Executives (ABE)</p>
-        <p class="edu-year">2013 – 2017 · Ofqual Regulated</p>
-      </div>
-
-      <div class="edu-card fade-in">
-        <span class="edu-badge">Diploma · ABE Level 5</span>
-        <h3 class="edu-qual">Diploma in Business Management — Higher (QCF)</h3>
-        <p class="edu-inst">Association of Business Executives (ABE)</p>
-        <p class="edu-year">2009 – 2012 · Ofqual Regulated</p>
-      </div>
-
-      <div class="edu-card fade-in">
-        <span class="edu-badge">Certificate · ABE</span>
-        <h3 class="edu-qual">Certificate in Business Administration</h3>
-        <p class="edu-inst">Association of Business Executives (ABE)</p>
-        <p class="edu-year">December 2006</p>
-      </div>
-
-      <div class="edu-card fade-in">
-        <span class="edu-badge">Professional Certificate</span>
-        <h3 class="edu-qual">Project Management for Development Professionals — Level 1</h3>
-        <p class="edu-inst">APMG International · Online</p>
-        <p class="edu-year">2017</p>
-      </div>
-
-      <div class="edu-card fade-in">
-        <span class="edu-badge">Membership</span>
-        <h3 class="edu-qual">Associate Member (AABE)</h3>
-        <p class="edu-inst">Association of Business Executives (ABE)</p>
-        <p class="edu-year">Admitted August 2012 · Membership No. 374379</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- DOCUMENTS -->
-<section id="documents">
-  <div class="container">
-    <p class="section-label fade-in">Verified Documents</p>
-    <h2 class="section-heading fade-in">Credentials &amp; <em>Downloads</em></h2>
-    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:2.4rem;max-width:560px;" class="fade-in">
-      All qualification documents are available below. Upload files to the same GitHub folder as this page and update each link accordingly.
-    </p>
-    <div class="docs-grid">
-      <a href="Lisa_Singine_CV_2026.pdf" class="doc-card fade-in" target="_blank">
-        <span class="doc-type">PDF · Curriculum Vitae</span>
-        <span class="doc-name">Full Curriculum Vitae 2026</span>
-        <span class="doc-desc">Complete professional history, achievements, partner organisations, and references.</span>
-        <span class="doc-arrow">Download ↓</span>
-      </a>
-      <a href="transcript_cavendish.pdf" class="doc-card fade-in" target="_blank">
-        <span class="doc-type">PDF · Academic Transcript</span>
-        <span class="doc-name">Cavendish University Transcript</span>
-        <span class="doc-desc">Official academic transcript for BSc Project Management — stamped by the Academic Registrar, February 2025.</span>
-        <span class="doc-arrow">Download ↓</span>
-      </a>
-      <a href="reference_letter.pdf" class="doc-card fade-in" target="_blank">
-        <span class="doc-type">PDF · Reference Letter</span>
-        <span class="doc-name">University Completion Letter</span>
-        <span class="doc-desc">Official letter from Cavendish University confirming programme completion and graduation scheduled 2nd October 2026.</span>
-        <span class="doc-arrow">Download ↓</span>
-      </a>
-      <a href="diploma_level6.jpg" class="doc-card fade-in" target="_blank">
-        <span class="doc-type">Certificate · ABE Level 6</span>
-        <span class="doc-name">ABE Level 6 Diploma in Business Management</span>
-        <span class="doc-desc">Ofqual-regulated qualification issued by the Association of Business Executives, February 2017.</span>
-        <span class="doc-arrow">View ↗</span>
-      </a>
-      <a href="diploma_level5.jpg" class="doc-card fade-in" target="_blank">
-        <span class="doc-type">Certificate · ABE Level 5</span>
-        <span class="doc-name">ABE Level 5 Diploma in Business Management (Higher)</span>
-        <span class="doc-desc">Business Management Pathway, Ofqual-regulated. Units include HRM, Managerial Accounting, and Marketing Policy.</span>
-        <span class="doc-arrow">View ↗</span>
-      </a>
-      <a href="certificate_business_admin.jpg" class="doc-card fade-in" target="_blank">
-        <span class="doc-type">Certificate · ABE</span>
-        <span class="doc-name">ABE Certificate in Business Administration</span>
-        <span class="doc-desc">Foundation qualification covering Introduction to Business, Quantitative Methods, Accounting, and Communication.</span>
-        <span class="doc-arrow">View ↗</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <p class="section-label fade-in">Get in Touch</p>
-    <h2 class="section-heading fade-in">Open to <em>opportunities</em></h2>
-    <div class="contact-inner">
-      <div class="contact-info fade-in">
-        <div class="contact-row">
-          <span class="contact-key">Email</span>
-          <span class="contact-val"><a href="mailto:lisasingine16@gmail.com">lisasingine16@gmail.com</a></span>
-        </div>
-        <div class="contact-row">
-          <span class="contact-key">Work</span>
-          <span class="contact-val"><a href="mailto:Lisa.Singine@fcdo.gov.uk">Lisa.Singine@fcdo.gov.uk</a></span>
-        </div>
-        <div class="contact-row">
-          <span class="contact-key">Phone</span>
-          <span class="contact-val">+260 966 139 341</span>
-        </div>
-        <div class="contact-row">
-          <span class="contact-key">Location</span>
-          <span class="contact-val">Lusaka, Zambia</span>
-        </div>
-        <div class="contact-row">
-          <span class="contact-key">Nationality</span>
-          <span class="contact-val">Zambian</span>
-        </div>
-      </div>
-      <div class="links-panel fade-in">
-        <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE" class="link-row" target="_blank">
-          <span class="link-row-icon">💼</span>
-          <span class="link-row-label">LinkedIn Profile</span>
-          <span class="link-row-arrow">↗</span>
-        </a>
-        <a href="Lisa_Singine_CV_2026.pdf" class="link-row" target="_blank">
-          <span class="link-row-icon">📄</span>
-          <span class="link-row-label">Download Full CV (PDF)</span>
-          <span class="link-row-arrow">↓</span>
-        </a>
-        <a href="transcript_cavendish.pdf" class="link-row" target="_blank">
-          <span class="link-row-icon">🎓</span>
-          <span class="link-row-label">Cavendish University Transcript</span>
-          <span class="link-row-arrow">↓</span>
-        </a>
-        <a href="reference_letter.pdf" class="link-row" target="_blank">
-          <span class="link-row-icon">✉️</span>
-          <span class="link-row-label">University Completion Letter</span>
-          <span class="link-row-arrow">↓</span>
-        </a>
-        <a href="mailto:lisasingine16@gmail.com" class="link-row btn-gold" style="color:#fff;border:none;">
-          <span class="link-row-icon">→</span>
-          <span class="link-row-label">Send a Message</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer>
-  © 2026 Lisa Singine · Programme Manager · British High Commission Lusaka
-</footer>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-        observer.unobserve(e.target);
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lisa Singine — Programme Manager | International Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --ink: #0d0d0d;
+        --cream: #f7f4ef;
+        --gold: #b8923a;
+        --gold-light: #d4ab5a;
+        --muted: #6b6560;
+        --rule: #e2ddd8;
+        --accent: #1a2744;
       }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-</script>
-</body>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { background: var(--cream); color: var(--ink); font-family: "DM Sans", sans-serif; font-size: 15px; line-height: 1.7; overflow-x: hidden; }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1rem 2rem;
+        background: rgba(247,244,239,0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--rule);
+      }
+      .nav-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem; font-weight: 300; letter-spacing: 0.1em;
+        color: var(--ink); text-decoration: none;
+        white-space: nowrap;
+      }
+      .nav-links { display: flex; gap: 2rem; list-style: none; }
+      .nav-links a {
+        font-size: 0.76rem; letter-spacing: 0.14em;
+        text-transform: uppercase; color: var(--muted);
+        text-decoration: none; transition: color 0.2s;
+      }
+      .nav-links a:hover { color: var(--gold); }
+
+      /* hamburger — hidden on desktop */
+      .menu-toggle {
+        display: none;
+        flex-direction: column; justify-content: center; align-items: center;
+        gap: 5px;
+        width: 40px; height: 40px;
+        background: none; border: 1.5px solid var(--rule);
+        border-radius: 6px; cursor: pointer; flex-shrink: 0;
+      }
+      .menu-toggle span {
+        display: block; width: 18px; height: 2px;
+        background: var(--ink); border-radius: 2px;
+        transition: all 0.25s;
+      }
+
+      /* mobile drawer */
+      .nav-backdrop {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.45); z-index: 105;
+      }
+      .nav-backdrop.open { display: block; }
+
+      /* ── HERO ── */
+      .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+      .hero-left {
+        background: var(--accent);
+        display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 8rem 4rem 5rem;
+      }
+      .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-weight: 500; }
+      .hero-name { font-family: "Cormorant Garamond", serif; font-size: clamp(3rem,5vw,5rem); font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: 1.6rem; }
+      .hero-name span { font-style: italic; color: var(--gold-light); }
+      .hero-title { font-size: 0.86rem; font-weight: 300; color: rgba(255,255,255,0.65); line-height: 1.9; }
+      .hero-divider { width: 40px; height: 1px; background: var(--gold); margin: 1.8rem 0; }
+      .hero-stats { display: flex; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+      .stat-num { font-family: "Cormorant Garamond", serif; font-size: 2rem; font-weight: 300; color: var(--gold-light); line-height: 1; }
+      .stat-label { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+      .hero-right { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 5rem 5rem; }
+      .hero-summary { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-weight: 300; line-height: 1.65; color: var(--ink); margin-bottom: 2rem; }
+      .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+      .btn { display: inline-flex; align-items: center; padding: 0.8rem 1.8rem; font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1.5px solid; transition: all 0.25s; }
+      .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+      .btn-outline { background: transparent; border-color: var(--ink); color: var(--ink); }
+      .btn-outline:hover { background: var(--ink); color: var(--cream); }
+      .btn-gold { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+      /* ── SECTIONS ── */
+      section { padding: 5rem 0; }
+      .container { max-width: 1080px; margin: 0 auto; padding: 0 2.5rem; }
+      .section-label { font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 0.5rem; }
+      .section-heading { font-family: "Cormorant Garamond", serif; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 300; line-height: 1.15; margin-bottom: 2.5rem; }
+      .section-heading em { font-style: italic; color: var(--gold); }
+
+      /* achievements */
+      #achievements { background: #fff; }
+      .achieve-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px; background: var(--rule); border: 1.5px solid var(--rule); }
+      .achieve-card { background: #fff; padding: 2rem 1.8rem; transition: background 0.2s; }
+      .achieve-card:hover { background: var(--cream); }
+      .achieve-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+      .achieve-heading { font-family: "Cormorant Garamond", serif; font-size: 1.25rem; font-weight: 400; margin-bottom: 0.6rem; line-height: 1.3; }
+      .achieve-body { font-size: 0.86rem; color: var(--muted); line-height: 1.75; }
+      .achieve-tag { display: inline-block; margin-top: 1rem; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--gold); padding-bottom: 0.1rem; }
+
+      /* experience */
+      #experience { background: var(--cream); }
+      .timeline { position: relative; padding-left: 2rem; }
+      .timeline::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+      .timeline-item { position: relative; padding-bottom: 3rem; padding-left: 2.4rem; }
+      .timeline-item::before { content: ""; position: absolute; left: -2rem; top: 0.4rem; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); border: 2px solid var(--cream); box-shadow: 0 0 0 1px var(--gold); }
+      .timeline-period { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; font-weight: 500; }
+      .timeline-role { font-family: "Cormorant Garamond", serif; font-size: 1.4rem; font-weight: 400; margin-bottom: 0.15rem; line-height: 1.2; }
+      .timeline-org { font-size: 0.8rem; color: var(--accent); font-weight: 500; margin-bottom: 1rem; }
+      .timeline-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+      .timeline-list li { font-size: 0.86rem; color: var(--muted); padding-left: 1rem; position: relative; line-height: 1.7; }
+      .timeline-list li::before { content: "—"; position: absolute; left: 0; color: var(--gold); }
+      .timeline-highlight { background: var(--accent); color: #fff; padding: 0.8rem 1.2rem; margin-top: 1rem; font-size: 0.83rem; border-left: 3px solid var(--gold); line-height: 1.6; }
+
+      /* partners */
+      #partners { background: #fff; }
+      .partners-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+      .partner-group { border: 1px solid var(--rule); padding: 1.8rem; }
+      .partner-theme { font-size: 0.67rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--rule); }
+      .partner-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+      .partner-list li { font-size: 0.85rem; }
+
+      /* education */
+      #education { background: var(--accent); }
+      #education .section-heading { color: #fff; }
+      #education .section-label { color: var(--gold-light); }
+      .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .edu-card { border: 1px solid rgba(255,255,255,0.12); padding: 2rem; transition: border-color 0.2s; }
+      .edu-card:hover { border-color: var(--gold); }
+      .edu-card.featured { grid-column: span 2; border-color: var(--gold); background: rgba(255,255,255,0.04); }
+      .edu-badge { display: inline-block; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.2rem 0.6rem; margin-bottom: 1rem; }
+      .edu-qual { font-family: "Cormorant Garamond", serif; font-size: 1.2rem; font-weight: 400; color: #fff; margin-bottom: 0.3rem; line-height: 1.3; }
+      .edu-inst { font-size: 0.8rem; color: rgba(255,255,255,0.55); margin-bottom: 0.3rem; }
+      .edu-year { font-size: 0.7rem; color: var(--gold-light); letter-spacing: 0.1em; }
+
+      /* documents */
+      #documents { background: var(--cream); }
+      .docs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+      .doc-card { border: 1.5px solid var(--rule); padding: 1.6rem; text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 0.6rem; transition: all 0.2s; background: #fff; position: relative; overflow: hidden; }
+      .doc-card::after { content: ""; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s; }
+      .doc-card:hover { border-color: var(--gold); }
+      .doc-card:hover::after { transform: scaleX(1); }
+      .doc-type { font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+      .doc-name { font-family: "Cormorant Garamond", serif; font-size: 1.05rem; font-weight: 400; line-height: 1.3; }
+      .doc-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; flex: 1; }
+      .doc-arrow { font-size: 0.76rem; color: var(--gold); align-self: flex-start; margin-top: 0.4rem; }
+
+      /* contact */
+      #contact { background: #fff; border-top: 1px solid var(--rule); }
+      .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+      .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+      .contact-row { display: flex; align-items: baseline; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
+      .contact-row:last-child { border-bottom: none; }
+      .contact-key { font-size: 0.67rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); min-width: 80px; font-weight: 500; }
+      .contact-val { font-size: 0.86rem; }
+      .contact-val a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); transition: border-color 0.2s; }
+      .contact-val a:hover { border-color: var(--gold); }
+      .links-panel { display: flex; flex-direction: column; gap: 0.8rem; }
+      .link-row { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; background: var(--cream); border: 1px solid var(--rule); text-decoration: none; color: var(--ink); font-size: 0.84rem; transition: all 0.2s; }
+      .link-row:hover { border-color: var(--gold); }
+      .link-row-icon { font-size: 1rem; min-width: 22px; }
+      .link-row-label { flex: 1; }
+      .link-row-arrow { color: var(--gold); font-size: 0.78rem; }
+
+      footer { background: var(--ink); color: rgba(255,255,255,0.4); text-align: center; padding: 2rem; font-size: 0.74rem; letter-spacing: 0.08em; }
+
+      .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .fade-in.visible { opacity: 1; transform: none; }
+
+      /* ═══════════════════════════════
+         MOBILE — max 768px
+      ═══════════════════════════════ */
+      @media (max-width: 768px) {
+
+        /* NAV — show hamburger, hide links by default */
+        nav { padding: 0.9rem 1.2rem; }
+        .menu-toggle { display: flex; }
+        .nav-links {
+          position: fixed;
+          top: 0; right: -100%; bottom: 0;
+          width: 75vw; max-width: 280px;
+          background: #fff;
+          flex-direction: column;
+          gap: 0;
+          padding-top: 4.5rem;
+          z-index: 110;
+          transition: right 0.3s ease;
+          border-left: 1px solid var(--rule);
+          box-shadow: -4px 0 20px rgba(0,0,0,0.08);
+        }
+        .nav-links.open { right: 0; }
+        .nav-links li { width: 100%; }
+        .nav-links a { display: block; padding: 1rem 1.5rem; font-size: 0.82rem; border-bottom: 1px solid var(--rule); }
+
+        /* HERO */
+        .hero { grid-template-columns: 1fr; min-height: auto; }
+        .hero-left { padding: 6.5rem 1.4rem 2.5rem; }
+        .hero-name { font-size: 2.8rem; }
+        .hero-title { font-size: 0.82rem; }
+        .hero-stats { gap: 1.4rem; }
+        .stat-num { font-size: 1.7rem; }
+        .hero-right { padding: 2.5rem 1.4rem 3rem; }
+        .hero-summary { font-size: 1.15rem; margin-bottom: 1.6rem; }
+        .hero-cta { flex-direction: column; }
+        .btn { justify-content: center; width: 100%; }
+
+        /* SECTIONS */
+        section { padding: 3rem 0; }
+        .container { padding: 0 1.2rem; }
+        .section-heading { font-size: 1.65rem; margin-bottom: 1.6rem; }
+
+        /* GRIDS — all single column */
+        .achieve-grid,
+        .partners-grid,
+        .docs-grid { grid-template-columns: 1fr; }
+        .edu-grid { grid-template-columns: 1fr; }
+        .edu-card.featured { grid-column: span 1; }
+        .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+        /* TIMELINE */
+        .timeline { padding-left: 1.2rem; }
+        .timeline-item { padding-left: 1.6rem; }
+        .timeline-item::before { left: -1.2rem; }
+        .timeline-role { font-size: 1.2rem; }
+
+        /* CONTACT */
+        .contact-row { flex-wrap: wrap; }
+        .contact-key { min-width: 60px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="nav-logo">Lisa Singine</a>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-backdrop" aria-hidden="true"></div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#achievements">Impact</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#documents">Documents</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <p class="hero-eyebrow">Programme Manager · International Development</p>
+        <h1 class="hero-name">Lisa<br /><span>Singine</span></h1>
+        <div class="hero-divider"></div>
+        <p class="hero-title">
+          Foreign Commonwealth &amp; Development Office<br />
+          British High Commission, Lusaka, Zambia<br />
+          FCDO Certified Project Delivery Professional
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Years at BHC</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">36,100</div>
+            <div class="stat-label">Girls Reached</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">£47m</div>
+            <div class="stat-label">Programmes Led</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <p class="hero-summary">
+          Senior programme professional delivering impact at scale across education, health, governance, and social protection in Zambia — at the highest levels of the British government.
+        </p>
+        <div class="hero-cta">
+          <a href="#documents" class="btn btn-primary">View Credentials</a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+      <div class="container">
+        <p class="section-label fade-in">Headline Achievements</p>
+        <h2 class="section-heading fade-in">Proven <em>impact</em> at scale</h2>
+        <div class="achieve-grid">
+          <div class="achieve-card fade-in">
+            <div class="achieve-icon">🎓</div>
+            <h3 class="achieve-heading">36,100 Girls — Target Exceeded by 40%</h3>
+            <p class="achieve-body">Served as Programme Responsible Owner for FCDO's £12m Girls' Education Infrastructure Programme across 5 provinces and 8 schools. Exceeded the target of 36,100 girl beneficiaries by 40%, expanding from 6 to 8 schools including 2 new builds in rural Zambia.</p>
+            <span class="achieve-tag">Programme Ownership</span>
+          </div>
+          <div class="achieve-card fade-in">
+            <div class="achieve-icon">🏥</div>
+            <h3 class="achieve-heading">£35m Health Systems Strengthening Programme</h3>
+            <p class="achieve-body">Managed the £35m Health Systems Strengthening Programme working with WHO, UNFPA, and USAID. Built a performance tracking system that cleared all audit findings and earned a formal commendation for managing a high-risk programme above grade — directly contributing to promotion.</p>
+            <span class="achieve-tag">High-Risk Programme Management</span>
+          </div>
+          <div class="achieve-card fade-in">
+            <div class="achieve-icon">⭐</div>
+            <h3 class="achieve-heading">Three Consecutive FCDO Spot Awards</h3>
+            <p class="achieve-body">Developed a compliance tracking tool permanently adopted across the full FCDO programme hub, ensuring 100% on-time completion of due diligence processes and annual review recommendations. Recognised with three consecutive quarterly Spot Awards (£250 each).</p>
+            <span class="achieve-tag">Excellence Award</span>
+          </div>
+          <div class="achieve-card fade-in">
+            <div class="achieve-icon">🤝</div>
+            <h3 class="achieve-heading">Resolved Critical Government Partnership</h3>
+            <p class="achieve-body">Brokered resolution of a high-risk breakdown between PEAS and the Zambian Ministry of Education through targeted influencing and joint British Council engagements. MoE went on to commission elements of PEAS's work and officially open several of their schools.</p>
+            <span class="achieve-tag">Stakeholder Diplomacy</span>
+          </div>
+          <div class="achieve-card fade-in">
+            <div class="achieve-icon">🔐</div>
+            <h3 class="achieve-heading">FCDO Certified Project Delivery Professional</h3>
+            <p class="achieve-body">Formally recognised under the FCDO Project Delivery Profession framework — a British government certification of advanced competence in programme lifecycle management. One of a small number of locally engaged staff to hold this certification.</p>
+            <span class="achieve-tag">Professional Certification</span>
+          </div>
+          <div class="achieve-card fade-in">
+            <div class="achieve-icon">🚀</div>
+            <h3 class="achieve-heading">Twice Acting Programme Officer</h3>
+            <p class="achieve-body">Appointed Acting Programme Officer in 2018 and again in 2022 ahead of permanent confirmation — reflecting sustained high performance and trust from senior FCDO leadership across over eight years as Assistant Programme Officer.</p>
+            <span class="achieve-tag">Leadership Recognition</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="container">
+        <p class="section-label fade-in">Career History</p>
+        <h2 class="section-heading fade-in">Over 15 years at the<br /><em>British High Commission</em></h2>
+        <div class="timeline">
+          <div class="timeline-item fade-in">
+            <p class="timeline-period">June 2022 – Present</p>
+            <h3 class="timeline-role">Programme Officer</h3>
+            <p class="timeline-org">Foreign Commonwealth &amp; Development Office (FCDO) · British High Commission, Lusaka</p>
+            <ul class="timeline-list">
+              <li>Programme Responsible Owner for the £12m Girls' Education Infrastructure Programme — 36,100 girl beneficiaries across 5 provinces and 8 schools, exceeding targets by 40%</li>
+              <li>Manage full delivery cycle across Democracy &amp; Governance, Social Protection, and Girls' Education programmes</li>
+              <li>Develop and maintain Theory of Change frameworks; apply adaptive management to evolving programme contexts</li>
+              <li>Manage partner funding agreements with PEAS, British Council, UNICEF, World Bank, British Red Cross, and Ministry of Education</li>
+              <li>Oversee financial forecasting, expenditure tracking, and risk management across all programme lifecycles</li>
+              <li>Deliver quarterly compliance training for all 1HMG staff</li>
+              <li>Identified a financial discrepancy through field interaction with a downstream partner and escalated through FCDO counter-fraud channels</li>
+              <li>Brokered resolution of the PEAS–Ministry of Education partnership breakdown, resulting in MoE commissioning PEAS work and opening multiple schools</li>
+            </ul>
+            <div class="timeline-highlight">Three consecutive FCDO Spot Awards for developing a permanent compliance tool adopted across the full programme hub.</div>
+          </div>
+          <div class="timeline-item fade-in">
+            <p class="timeline-period">April 2014 – May 2022</p>
+            <h3 class="timeline-role">Assistant Programme Officer</h3>
+            <p class="timeline-org">Foreign Commonwealth &amp; Development Office (FCDO) · British High Commission, Lusaka</p>
+            <ul class="timeline-list">
+              <li>Supported delivery across multiple FCDO programmes including the £35m Health Systems Strengthening Programme (WHO, UNFPA, USAID)</li>
+              <li>Built the £35m programme tracking system — improving partner reporting and clearing all outstanding audit findings</li>
+              <li>Drafted and managed partner funding agreements for NGOs and multilateral partners</li>
+              <li>Contributed to performance reviews, field monitoring visits, and due diligence assessments</li>
+              <li>Assisted with financial management through forecasting, expenditure tracking, and DFID payment processing</li>
+              <li>Acted as Personal Assistant to the British High Commissioner and Development Director during absences</li>
+            </ul>
+            <div class="timeline-highlight">Appointed Acting Programme Officer in 2018 and again in 2022 ahead of permanent confirmation.</div>
+          </div>
+          <div class="timeline-item fade-in">
+            <p class="timeline-period">April 2009 – March 2014</p>
+            <h3 class="timeline-role">Entry Clearance Assistant</h3>
+            <p class="timeline-org">UK Border Agency · British High Commission, Lusaka</p>
+            <ul class="timeline-list">
+              <li>Managed operations of the UK Border Agency visa section, including records management and monthly audit compliance</li>
+              <li>Served as primary contact for all applicants including diplomatic passport holders and senior government officials, while the Entry Clearance Manager operated remotely from South Africa</li>
+              <li>Provided direct applicant assessments and professional opinions to inform visa decisions</li>
+              <li>Enrolled biometrics and maintained workstations to UK Border Agency standards</li>
+              <li>Line-managed a member of the visa section team</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTNERS -->
+    <section id="partners">
+      <div class="container">
+        <p class="section-label fade-in">Organisations Worked With</p>
+        <h2 class="section-heading fade-in">Key <em>partners</em> &amp; institutions</h2>
+        <div class="partners-grid">
+          <div class="partner-group fade-in">
+            <p class="partner-theme">Girls' Education</p>
+            <ul class="partner-list">
+              <li>Promoting Equality in African Schools (PEAS)</li>
+              <li>British Council</li>
+              <li>Ministry of Education, Zambia</li>
+            </ul>
+          </div>
+          <div class="partner-group fade-in">
+            <p class="partner-theme">Health Systems Strengthening</p>
+            <ul class="partner-list">
+              <li>World Health Organisation (WHO)</li>
+              <li>UNFPA</li>
+              <li>USAID</li>
+            </ul>
+          </div>
+          <div class="partner-group fade-in">
+            <p class="partner-theme">Social Protection</p>
+            <ul class="partner-list">
+              <li>World Bank</li>
+              <li>UNICEF</li>
+              <li>British Red Cross</li>
+              <li>Institute of Development Studies (IDS)</li>
+              <li>Ministry of Community Development &amp; Social Services</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="container">
+        <p class="section-label fade-in">Academic Credentials</p>
+        <h2 class="section-heading fade-in">Education &amp; <em>Qualifications</em></h2>
+        <div class="edu-grid">
+          <div class="edu-card featured fade-in">
+            <span class="edu-badge">Degree · Graduated 2025</span>
+            <h3 class="edu-qual">Bachelor of Science in Project Management</h3>
+            <p class="edu-inst">Cavendish University Zambia — School of Business &amp; IT</p>
+            <p class="edu-year">2021 – 2025</p>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.5);margin-top:0.8rem;line-height:1.7;">
+              Full four-year programme completed. Final year modules: Research Methods (B+), Change Management (B+), Project Appraisal &amp; Analysis (B), Project Closure &amp; Handover (B+).
+            </p>
+          </div>
+          <div class="edu-card fade-in">
+            <span class="edu-badge">Diploma · ABE Level 6</span>
+            <h3 class="edu-qual">Diploma in Business Management (QCF)</h3>
+            <p class="edu-inst">Association of Business Executives (ABE)</p>
+            <p class="edu-year">2013 – 2017 · Ofqual Regulated</p>
+          </div>
+          <div class="edu-card fade-in">
+            <span class="edu-badge">Diploma · ABE Level 5</span>
+            <h3 class="edu-qual">Diploma in Business Management — Higher (QCF)</h3>
+            <p class="edu-inst">Association of Business Executives (ABE)</p>
+            <p class="edu-year">2009 – 2012 · Ofqual Regulated</p>
+          </div>
+          <div class="edu-card fade-in">
+            <span class="edu-badge">Certificate · ABE</span>
+            <h3 class="edu-qual">Certificate in Business Administration</h3>
+            <p class="edu-inst">Association of Business Executives (ABE)</p>
+            <p class="edu-year">December 2006</p>
+          </div>
+          <div class="edu-card fade-in">
+            <span class="edu-badge">Professional Certificate</span>
+            <h3 class="edu-qual">Project Management for Development Professionals — Level 1</h3>
+            <p class="edu-inst">APMG International · Online</p>
+            <p class="edu-year">2017</p>
+          </div>
+          <div class="edu-card fade-in">
+            <span class="edu-badge">Membership</span>
+            <h3 class="edu-qual">Associate Member (AABE)</h3>
+            <p class="edu-inst">Association of Business Executives (ABE)</p>
+            <p class="edu-year">Admitted August 2012 · Membership No. 374379</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOCUMENTS -->
+    <section id="documents">
+      <div class="container">
+        <p class="section-label fade-in">Verified Documents</p>
+        <h2 class="section-heading fade-in">Credentials &amp; <em>Downloads</em></h2>
+        <div class="docs-grid">
+          <a href="Lisa_Singine_CV_2026.pdf" class="doc-card fade-in" target="_blank">
+            <span class="doc-type">PDF · Curriculum Vitae</span>
+            <span class="doc-name">Full Curriculum Vitae 2026</span>
+            <span class="doc-desc">Complete professional history, achievements, partner organisations, and references.</span>
+            <span class="doc-arrow">Download ↓</span>
+          </a>
+          <a href="transcript_cavendish.pdf" class="doc-card fade-in" target="_blank">
+            <span class="doc-type">PDF · Academic Transcript</span>
+            <span class="doc-name">Cavendish University Transcript</span>
+            <span class="doc-desc">Official academic transcript for BSc Project Management — stamped by the Academic Registrar.</span>
+            <span class="doc-arrow">Download ↓</span>
+          </a>
+          <a href="reference_letter.pdf" class="doc-card fade-in" target="_blank">
+            <span class="doc-type">PDF · Reference Letter</span>
+            <span class="doc-name">University Completion Letter</span>
+            <span class="doc-desc">Official letter from Cavendish University confirming programme completion.</span>
+            <span class="doc-arrow">Download ↓</span>
+          </a>
+          <a href="diploma_level6.jpg" class="doc-card fade-in" target="_blank">
+            <span class="doc-type">Certificate · ABE Level 6</span>
+            <span class="doc-name">ABE Level 6 Diploma in Business Management</span>
+            <span class="doc-desc">Ofqual-regulated qualification, February 2017.</span>
+            <span class="doc-arrow">View ↗</span>
+          </a>
+          <a href="diploma_level5.jpg" class="doc-card fade-in" target="_blank">
+            <span class="doc-type">Certificate · ABE Level 5</span>
+            <span class="doc-name">ABE Level 5 Diploma in Business Management (Higher)</span>
+            <span class="doc-desc">Business Management Pathway, Ofqual-regulated.</span>
+            <span class="doc-arrow">View ↗</span>
+          </a>
+          <a href="certificate_business_admin.jpg" class="doc-card fade-in" target="_blank">
+            <span class="doc-type">Certificate · ABE</span>
+            <span class="doc-name">ABE Certificate in Business Administration</span>
+            <span class="doc-desc">Foundation qualification covering Business, Accounting, and Communication.</span>
+            <span class="doc-arrow">View ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <p class="section-label fade-in">Get in Touch</p>
+        <h2 class="section-heading fade-in">Open to <em>opportunities</em></h2>
+        <div class="contact-inner">
+          <div class="contact-info fade-in">
+            <div class="contact-row">
+              <span class="contact-key">Email</span>
+              <span class="contact-val"><a href="mailto:lisasingine16@gmail.com">lisasingine16@gmail.com</a></span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">Work</span>
+              <span class="contact-val"><a href="mailto:Lisa.Singine@fcdo.gov.uk">Lisa.Singine@fcdo.gov.uk</a></span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">Location</span>
+              <span class="contact-val">Lusaka, Zambia</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-key">Nationality</span>
+              <span class="contact-val">Zambian</span>
+            </div>
+          </div>
+          <div class="links-panel fade-in">
+            <a href="https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE" class="link-row" target="_blank">
+              <span class="link-row-icon">💼</span>
+              <span class="link-row-label">LinkedIn Profile</span>
+              <span class="link-row-arrow">↗</span>
+            </a>
+            <a href="Lisa_Singine_CV_2026.pdf" class="link-row" target="_blank">
+              <span class="link-row-icon">📄</span>
+              <span class="link-row-label">Download Full CV (PDF)</span>
+              <span class="link-row-arrow">↓</span>
+            </a>
+            <a href="transcript_cavendish.pdf" class="link-row" target="_blank">
+              <span class="link-row-icon">🎓</span>
+              <span class="link-row-label">Cavendish University Transcript</span>
+              <span class="link-row-arrow">↓</span>
+            </a>
+            <a href="reference_letter.pdf" class="link-row" target="_blank">
+              <span class="link-row-icon">✉️</span>
+              <span class="link-row-label">University Completion Letter</span>
+              <span class="link-row-arrow">↓</span>
+            </a>
+            <a href="mailto:lisasingine16@gmail.com" class="link-row btn-gold" style="color:#fff;border:none;">
+              <span class="link-row-icon">→</span>
+              <span class="link-row-label">Send a Message</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 Lisa Singine · Programme Manager · British High Commission Lusaka</footer>
+
+    <script>
+      // Fade in
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((e, i) => {
+          if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add("visible"), i * 80);
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+      // Hamburger menu
+      const toggle   = document.querySelector(".menu-toggle");
+      const navLinks = document.getElementById("navLinks");
+      const backdrop = document.querySelector(".nav-backdrop");
+
+      function openMenu(open) {
+        navLinks.classList.toggle("open", open);
+        backdrop.classList.toggle("open", open);
+        toggle.setAttribute("aria-expanded", String(open));
+        document.body.style.overflow = open ? "hidden" : "";
+      }
+
+      toggle.addEventListener("click", () => {
+        openMenu(toggle.getAttribute("aria-expanded") !== "true");
+      });
+      backdrop.addEventListener("click", () => openMenu(false));
+      navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => openMenu(false)));
+      window.addEventListener("resize", () => { if (window.innerWidth > 768) openMenu(false); });
+    </script>
+  </body>
 </html>
