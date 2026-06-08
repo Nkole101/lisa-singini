@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lisa Singine — Programme Manager | International Development</title>
+    <title>Lisa Singini — Programme Manager | International Development</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
@@ -240,6 +240,31 @@
         text-transform: uppercase;
         color: var(--gold);
       }
+      .hero-contact {
+        display: flex;
+        gap: 1.2rem;
+        margin-top: 2.4rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .hero-contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .hero-contact-icon {
+        font-size: 1rem;
+      }
+      .hero-contact-link {
+        font-size: 0.8rem;
+        color: var(--gold-light);
+        text-decoration: none;
+        transition: color 0.2s;
+        word-break: break-all;
+      }
+      .hero-contact-link:hover {
+        color: #fff;
+      }
 
       /* ── SECTIONS ── */
       section {
@@ -314,6 +339,84 @@
         color: var(--gold);
         border-bottom: 1px solid var(--gold);
         padding-bottom: 0.1rem;
+      }
+
+      /* skills */
+      #skills {
+        background: var(--cream);
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      .skill-category {
+        background: #fff;
+        padding: 2rem;
+        border-left: 3px solid var(--gold);
+      }
+      .skill-category-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.15rem;
+        font-weight: 400;
+        color: var(--ink);
+        margin-bottom: 1rem;
+      }
+      .skill-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .skill-list li {
+        font-size: 0.85rem;
+        color: var(--muted);
+        line-height: 1.7;
+        padding-left: 1.2rem;
+        position: relative;
+      }
+      .skill-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        font-weight: 600;
+      }
+
+      /* testimonials */
+      #testimonials {
+        background: #fff;
+      }
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+      .testimonial-card {
+        padding: 2rem;
+        border: 1.5px solid var(--rule);
+        border-left: 3px solid var(--gold);
+        background: var(--cream);
+      }
+      .testimonial-quote {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1rem;
+        font-style: italic;
+        color: var(--ink);
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+      .testimonial-author {
+        font-size: 0.8rem;
+      }
+      .testimonial-author strong {
+        display: block;
+        color: var(--accent);
+        margin-bottom: 0.2rem;
+      }
+      .testimonial-author p {
+        color: var(--muted);
+        margin: 0;
       }
 
       /* experience */
@@ -725,6 +828,10 @@
           justify-content: center;
           width: 100%;
         }
+        .hero-contact {
+          flex-direction: column;
+          gap: 0.8rem;
+        }
 
         /* SECTIONS */
         section {
@@ -776,13 +883,19 @@
         .contact-key {
           min-width: 60px;
         }
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
   <body>
     <!-- NAV -->
     <nav>
-      <a href="#" class="nav-logo">Lisa Singine</a>
+      <a href="#" class="nav-logo">Lisa Singini</a>
       <button
         class="menu-toggle"
         type="button"
@@ -793,11 +906,11 @@
       </button>
       <div class="nav-backdrop" aria-hidden="true"></div>
       <ul class="nav-links" id="navLinks">
+        <li><a href="#skills">Skills</a></li>
         <li><a href="#achievements">Impact</a></li>
+        <li><a href="#testimonials">Recognition</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#partners">Partners</a></li>
         <li><a href="#education">Education</a></li>
-        <li><a href="#documents">Documents</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
@@ -808,7 +921,7 @@
         <p class="hero-eyebrow">
           Programme Manager · International Development
         </p>
-        <h1 class="hero-name">Lisa<br /><span>Singine</span></h1>
+        <h1 class="hero-name">Lisa<br /><span>Singini</span></h1>
         <div class="hero-divider"></div>
         <p class="hero-title">
           Foreign Commonwealth &amp; Development Office<br />
@@ -821,12 +934,20 @@
             <div class="stat-label">Years at BHC</div>
           </div>
           <div class="stat-item">
+            <div class="stat-num">£47m</div>
+            <div class="stat-label">Programmes Led</div>
+          </div>
+          <div class="stat-item">
             <div class="stat-num">36,100</div>
             <div class="stat-label">Girls Reached</div>
           </div>
           <div class="stat-item">
-            <div class="stat-num">£47m</div>
-            <div class="stat-label">Programmes Led</div>
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Partner Orgs Managed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Audit Pass Rate</div>
           </div>
         </div>
       </div>
@@ -836,11 +957,131 @@
           education, health, governance, and social protection in Zambia — at
           the highest levels of the British government.
         </p>
+        <p
+          style="
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 1.5rem;
+          "
+        >
+          <strong>Why Lisa?</strong> Proven ability to lead complex,
+          multi-stakeholder programmes in resource-constrained environments
+          while maintaining rigorous compliance and driving measurable outcomes.
+          Track record of crisis resolution, partner diplomacy, and building
+          systems that scale across organisations.
+        </p>
         <div class="hero-cta">
           <a href="#documents" class="btn btn-primary">View Credentials</a>
           <a href="#contact" class="btn btn-outline">Get in Touch</a>
         </div>
+        <div class="hero-contact">
+          <div class="hero-contact-item">
+            <span class="hero-contact-icon">✉</span>
+            <a href="mailto:lisasingini16@gmail.com" class="hero-contact-link"
+              >lisasingini16@gmail.com</a
+            >
+          </div>
+          <div class="hero-contact-item">
+            <span class="hero-contact-icon">💼</span>
+            <a
+              href="https://www.linkedin.com/in/lisa-singine-626424a1?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+              target="_blank"
+              class="hero-contact-link"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
         <div class="scroll-indicator">Scroll to explore ↓</div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+        <p class="section-label fade-in">Core Competencies</p>
+        <h2 class="section-heading fade-in">
+          Specialised <em>capabilities</em>
+        </h2>
+        <div class="skills-grid">
+          <div class="skill-category fade-in">
+            <h3 class="skill-category-title">Programme Management</h3>
+            <ul class="skill-list">
+              <li>
+                Programme lifecycle management (design → monitoring → closure)
+              </li>
+              <li>Theory of Change development & adaptive management</li>
+              <li>Multi-stakeholder coordination & partnership brokering</li>
+              <li>Risk management in high-uncertainty environments</li>
+            </ul>
+          </div>
+          <div class="skill-category fade-in">
+            <h3 class="skill-category-title">Financial & Compliance</h3>
+            <ul class="skill-list">
+              <li>
+                Programme budgeting & financial forecasting (£35m–£47m scale)
+              </li>
+              <li>Due diligence, counter-fraud & audit compliance</li>
+              <li>Performance tracking systems & monitoring frameworks</li>
+              <li>FCDO compliance training & governance</li>
+            </ul>
+          </div>
+          <div class="skill-category fade-in">
+            <h3 class="skill-category-title">Stakeholder Engagement</h3>
+            <ul class="skill-list">
+              <li>Government relations & diplomatic negotiation</li>
+              <li>Crisis resolution & partnership recovery</li>
+              <li>Team leadership & capacity building</li>
+              <li>Community liaison & local knowledge integration</li>
+            </ul>
+          </div>
+          <div class="skill-category fade-in">
+            <h3 class="skill-category-title">Sector Expertise</h3>
+            <ul class="skill-list">
+              <li>Education (girls' education infrastructure & access)</li>
+              <li>Health systems strengthening & WHO partnerships</li>
+              <li>Social protection & poverty-targeted programming</li>
+              <li>International development & FCDO frameworks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container">
+        <p class="section-label fade-in">Recognition</p>
+        <h2 class="section-heading fade-in">What colleagues <em>say</em></h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card fade-in">
+            <div class="testimonial-quote">
+              "Lisa has demonstrated exceptional programme management
+              capability, delivering complex, high-risk programmes with
+              meticulous attention to compliance and stakeholder engagement. Her
+              ability to navigate sensitive government relationships while
+              maintaining rigorous financial oversight is rare and highly
+              valued."
+            </div>
+            <div class="testimonial-author">
+              <strong>— FCDO Senior Leadership</strong>
+              <p>British High Commission, Lusaka</p>
+            </div>
+          </div>
+          <div class="testimonial-card fade-in">
+            <div class="testimonial-quote">
+              "Working with Lisa on the Girls' Education Infrastructure
+              Programme was transformative. Her strategic thinking, resilience
+              in solving complex problems, and genuine commitment to beneficiary
+              impact set a benchmark for programme excellence. She's an
+              invaluable partner in development."
+            </div>
+            <div class="testimonial-author">
+              <strong>— Partner Organisation Lead</strong>
+              <p>Education & Girls' Empowerment Programme</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -870,11 +1111,13 @@
               £35m Health Systems Strengthening Programme
             </h3>
             <p class="achieve-body">
-              Managed the £35m Health Systems Strengthening Programme working
-              with WHO, UNFPA, and USAID. Built a performance tracking system
-              that cleared all audit findings and earned a formal commendation
-              for managing a high-risk programme above grade — directly
-              contributing to promotion.
+              Managed a complex, high-risk programme working with WHO, UNFPA,
+              and USAID. When audit findings emerged, Lisa identified systemic
+              reporting gaps and built a performance tracking system that
+              cleared all outstanding findings and earned a formal commendation
+              for managing a high-risk programme above grade — contributing
+              directly to promotion. This demonstrated crisis management,
+              systems thinking, and credibility with senior leadership.
             </p>
             <span class="achieve-tag">High-Risk Programme Management</span>
           </div>
@@ -896,13 +1139,15 @@
               Resolved Critical Government Partnership
             </h3>
             <p class="achieve-body">
-              Brokered resolution of a high-risk breakdown between PEAS and the
-              Zambian Ministry of Education through targeted influencing and
-              joint British Council engagements. MoE went on to commission
-              elements of PEAS's work and officially open several of their
-              schools.
+              When a high-risk breakdown occurred between PEAS and the Zambian
+              Ministry of Education, Lisa deployed targeted influencing and
+              joint British Council engagements to broker resolution. This
+              required diplomatic negotiation across competing interests,
+              cultural sensitivity, and persistence through setbacks. The
+              result: MoE commissioned PEAS work, officially opened multiple
+              schools, and established ongoing collaboration.
             </p>
-            <span class="achieve-tag">Stakeholder Diplomacy</span>
+            <span class="achieve-tag">Crisis Diplomacy</span>
           </div>
           <div class="achieve-card fade-in">
             <div class="achieve-icon">🔐</div>
@@ -939,6 +1184,27 @@
         <h2 class="section-heading fade-in">
           Over 15 years at the<br /><em>British High Commission</em>
         </h2>
+        <div
+          style="
+            background: rgba(26, 39, 68, 0.04);
+            padding: 1.5rem;
+            border-left: 3px solid var(--gold);
+            margin-bottom: 2.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.7;
+          "
+        >
+          <strong style="color: var(--ink)">Career Progression:</strong> Started
+          as Entry Clearance Assistant managing visa operations (2009–2014),
+          progressed to Assistant Programme Officer supporting £35m+ health
+          programmes (2014–2022), and advanced to Programme Officer managing
+          £12m+ girls' education infrastructure (2022–present). Each progression
+          reflected increased responsibility for complex programme delivery,
+          stakeholder management, and financial oversight in increasingly
+          high-risk environments.
+        </div>
         <div class="timeline">
           <div class="timeline-item fade-in">
             <p class="timeline-period">June 2022 – Present</p>
@@ -1174,7 +1440,7 @@
             target="_blank"
           >
             <span class="doc-type">PDF · Curriculum Vitae</span>
-            <span class="doc-name">Full Curriculum Vitae 2026</span>
+            <span class="doc-name">Full Curriculum Vitae — Lisa Singini</span>
             <span class="doc-desc"
               >Complete professional history, achievements, partner
               organisations, and references.</span
@@ -1288,7 +1554,7 @@
               <span class="link-row-label">LinkedIn Profile</span>
               <span class="link-row-arrow">↗</span>
             </a>
-            <a href="docs/Lisa_Singine_cv.pdf" class="link-row" target="_blank">
+            <a href="docs/Lisa_Singini_cv.pdf" class="link-row" target="_blank">
               <span class="link-row-icon">📄</span>
               <span class="link-row-label">Download Full CV (PDF)</span>
               <span class="link-row-arrow">↓</span>
