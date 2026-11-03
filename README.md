@@ -1,14 +1,7 @@
-# Lisa Singini portfolio
+# Lisa Singine — redirect
 
-This repository contains the static portfolio site for GitHub Pages.
+This GitHub Pages site now redirects to Lisa Singine's portfolio at
+**https://lisasingine.web.app** (Next.js on Cloud Run, fronted by Firebase Hosting).
 
-## GitHub Pages
-
-1. Open the repository on GitHub.
-2. Go to Settings → Pages.
-3. Set Source to "Deploy from a branch".
-4. Choose branch `main` and folder `/ (root)`.
-5. Save.
-
-Your site will be available at:
-https://nkole101.github.io/lisa-singini/
+The repository name misspells her surname ("Singini"). The correct spelling is **Singine**.
+`docs/Lisa_Singine_cv.pdf` is kept so old CV links keep working.
